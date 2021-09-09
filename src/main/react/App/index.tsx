@@ -1,50 +1,41 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { Env } from '../_core/Env'
+import { Controller, ControllerContext, IController } from '../_core/Controller'
+import { Login } from './Login'
+import { Dashboard } from './Dashboard'
 
-import logo from "../../resources/images/logo.svg"
 
-const App: React.FunctionComponent = () => {
-    return (
-        <Container>
-            <Header>
-                <Logo src={logo} alt='logo' />
-                <p>Starter React App</p>
-                <Link
-                    href='https://reactjs.org'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    Check starter on GIT
-                </Link>
-                <p>
-                    STANDALONE: {Env.STANDALONE?.toString()}<br />
-                    AUTH_API: {Env.AUTH_API}<br />
-                </p>
-            </Header>
-        </Container>
-    )
+export const Routes = {
+    Login: '/login',
+    Dashboard: '/',
 }
+const App = () => {
+    const [controller, setController] = useState<IController>()
 
-const Container = styled.div`
-  text-align: center;
-`
-const Logo = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-`
-const Header = styled.header`
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-`
-const Link = styled.a`
-  color: #61dafb;
-`
+    useEffect(() => {
+        console.log('controller initialed')
+        Controller.create().then(_controller => {
+            console.log('controller created')
+            setController(_controller)
+        })
+    }, [])
 
+    if (!controller) {
+        return null
+    }
+    return (
+        <ControllerContext.Provider value={controller}>
+            <Router ref={(router: any) => controller?.setHistoryEntry(router.history)}>
+                <Switch>
+                    <Route path={Routes.Login} exact>
+                        <Login />
+                    </Route>
+                    <Route path={Routes.Dashboard} exact>
+                        <Dashboard />
+                    </Route>
+                </Switch>
+            </Router>
+        </ControllerContext.Provider>)
+}
 export default App

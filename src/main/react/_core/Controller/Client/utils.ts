@@ -37,3 +37,7 @@ export class HttpResponse<T> {
         this.status = status;
     }
 }
+export interface IStateApi<T> {
+    status: "INITIALIZE"|"LOADING"|"SUCCESS"|"ERROR"
+    data?: T
+}

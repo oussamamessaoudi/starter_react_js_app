@@ -7,10 +7,12 @@ This project is a starter of apps that use REACT & TYPESCRIPT.
 
 - React 
 - React Dom
+- React Router Dom
 - TypeScript
 - Styled Components 
 - env-cmd (for using environments)
 - axios
+- faker
 
 ### Dev:
 - eslint
@@ -37,7 +39,21 @@ ROOT
 |    |    |    |    |    |*---index.ts
 |    |    |    |    |----Env
 |    |    |    |    |    |*---index.ts
+|    |    |    |    |----utils
+|    |    |    |    |    |----Hooks
+|    |    |    |    |    |    |*---index.ts
 |    |    |    |----App
+|    |    |    |    |----_components 
+|    |    |    |    |    |----Loading
+|    |    |    |    |    |    |*---index.tsx
+|    |    |    |    |    |****ADDING COMPONENTS
+|    |    |    |    |----Dashboard(Page 1)
+|    |    |    |    |    |*---index.tsx
+|    |    |    |    |----Login(Page 2)
+|    |    |    |    |    |*---index.tsx
+|    |    |    |    |    |*---Controller.tsx
+|    |    |    |    |****CREATING PAGES
+|    |    |    |    |*---index.tsx (starter of the App)
 |    |    |----ressources
 |    |    |    |----images
 |    |    |    |    |*---logo.svg
